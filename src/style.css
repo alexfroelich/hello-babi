@@ -373,8 +373,9 @@ h1 em { color: #d43c90; }
 .topic-picker-trigger:focus-visible, .topic-option:focus-visible { outline: 3px solid #eaa2c6; outline-offset: 2px; }
 .topic-picker-flower { display: grid; flex: 0 0 22px; width: 22px; height: 22px; place-items: center; border-radius: 8px; color: #cc6c9e; background: #fce1ef; font-size: 15px; }
 .topic-picker-value { flex: 1; text-align: left; white-space: nowrap; }
-.topic-picker-chevron { color: #ce679c; font: 17px/1 'DM Sans', sans-serif; transform: translateY(-2px); transition: transform .2s ease; }
-.topic-picker-chevron.open { transform: rotate(180deg) translateY(2px); }
+.topic-picker-chevron { display: grid; flex: 0 0 16px; width: 16px; height: 16px; place-items: center; color: #ce679c; transform: translateY(1px); transition: transform .2s ease; }
+.topic-picker-chevron svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.topic-picker-chevron.open { transform: rotate(180deg); }
 .topic-menu { position: absolute; top: calc(100% + 9px); right: 0; z-index: 60; width: min(248px, calc(100vw - 28px)); padding: 8px; border: 1px solid #f0d5e3; border-radius: 17px; background: linear-gradient(145deg, #fffefe, #fff6fa); box-shadow: 0 14px 35px #a9417c26, 0 3px 9px #a9417c10; }
 .topic-menu-heading { margin: 4px 8px 7px; color: #b585a1; font: 8px 'DM Mono', monospace; letter-spacing: 1px; }
 .topic-option { display: flex; align-items: center; gap: 10px; width: 100%; min-height: 55px; padding: 7px 9px; border: 1px solid transparent; border-radius: 12px; background: transparent; color: #68445f; text-align: left; cursor: pointer; transition: background .18s ease, border-color .18s ease, transform .18s ease; }
@@ -1607,11 +1608,6 @@ h1 em { color: #d43c90; }
 }
 
 
-/* Keep Midnight Rebel's game mode dropdown above the question and card text. */
-:root[data-theme='emo'] .quiz-card .card-head { position: relative; z-index: 80; }
-:root[data-theme='emo'] .game-mode-picker { position: relative; z-index: 90; }
-:root[data-theme='emo'] .game-mode-picker .mode-menu { z-index: 100; }
-
 .option-translations { display: grid; gap: 2px; margin: 5px 0 0; padding-left: 17px; }
 .option-translations li { padding-left: 1px; }
 .option-translations b { color: #627653; font-weight: 700; }
@@ -1705,3 +1701,108 @@ h1 em { color: #d43c90; }
 :root[data-theme='emo'] .splash-wordmark span { color: #c6b3df; }
 :root[data-theme='emo'] .feedback-correct span { color: #d6c7e8; text-shadow: 0 0 10px #b9a4d477; }
 :root[data-theme='emo'] .feedback-incorrect span { color: #d5b7a9; }
+
+/* Keep the game mode chooser modal consistent with the grammar topic browser. */
+.game-mode-browser { width: min(430px, 100%); }
+.game-mode-options { gap: 6px; }
+.game-mode-options .topic-option { min-height: 62px; }
+:root[data-theme='christian'] .faith-cross {
+  z-index: 6 !important;
+}
+:root[data-theme='christian'] .answer-option.correct .answer-letter { background: #748b69; }
+:root[data-theme='christian'] .answer-option.correct.celebrating::before,
+:root[data-theme='christian'] .answer-option.correct.celebrating::after { color: #c0a160; }
+:root[data-theme='christian'] .topic-option:hover,
+:root[data-theme='christian'] .theme-option:hover { border-color: #d9dfcf; background: #f1f3e9; }
+:root[data-theme='christian'] .topic-picker-trigger:hover,
+:root[data-theme='christian'] .topic-picker-trigger[aria-expanded='true'],
+:root[data-theme='christian'] .theme-picker-trigger:hover,
+:root[data-theme='christian'] .theme-picker-trigger[aria-expanded='true'] { border-color: #bdc9ae; box-shadow: 0 5px 16px #657a5720, inset 0 1px #fff; }
+:root[data-theme='christian'] .game-mode-picker .theme-preview { color: #fffaf0; background: linear-gradient(135deg, #819772, #c3a05e); }
+:root[data-theme='christian'] .theme-picker-trigger .theme-swatches i:nth-child(1) { background: #809574; }
+:root[data-theme='christian'] .theme-picker-trigger .theme-swatches i:nth-child(2) { background: #c4a363; }
+:root[data-theme='christian'] .theme-picker-trigger .theme-swatches i:nth-child(3) { background: #e4e8d8; }
+:root[data-theme='emo'] .dialogue-response p,
+:root[data-theme='emo'] .splash-wordmark { color: #f0b6d4; }
+:root[data-theme='emo'] .splash-wordmark span { color: #f276aa; }
+:root[data-theme='emo'] .theme-option.selected .topic-option-copy strong,
+:root[data-theme='emo'] .theme-option.selected .topic-option-check { color: #f0b6d4; }
+
+/* Midnight Rebel: replace inherited white surfaces with layered plum tones. */
+:root[data-theme='emo'] .note-card { border-color: #514357; color: #f1e7f3; background: linear-gradient(120deg, #352d3d, #2b2635); box-shadow: 0 7px 20px #09080f55; }
+:root[data-theme='emo'] .note-card p { color: #c7b7cf; }
+:root[data-theme='emo'] .note-card strong { color: #f4c2dc; }
+:root[data-theme='emo'] .category-tag,
+:root[data-theme='emo'] .result-tag { color: #ffc1db; background: #403044; }
+:root[data-theme='emo'] .question-mark { color: #49364d; }
+:root[data-theme='emo'] .question-mark span { color: #d98ab7; }
+:root[data-theme='emo'] .choose-hint,
+:root[data-theme='emo'] .result-caption,
+:root[data-theme='emo'] .result-screen h2,
+:root[data-theme='emo'] .result-copy { color: #c7b7cf; }
+:root[data-theme='emo'] .result-score span { color: #b7a8c3; }
+:root[data-theme='emo'] .result-bar { background: #453749; }
+:root[data-theme='emo'] .help-toggle { border-color: #59455e; color: #f0c1da; background: linear-gradient(135deg, #392d41, #30273a); }
+:root[data-theme='emo'] .help-toggle:hover,
+:root[data-theme='emo'] .help-toggle[aria-expanded='true'] { border-color: #b95796; background: #463047; }
+:root[data-theme='emo'] .help-toggle > span { color: #211923; background: #ec72aa; }
+:root[data-theme='emo'] .help-panel { border-color: #57465e; color: #e9dfee; background: linear-gradient(135deg, #352d3d, #2a2434); }
+:root[data-theme='emo'] .help-panel strong,
+:root[data-theme='emo'] .help-grammar-points li strong { color: #f0a9ca; }
+:root[data-theme='emo'] .help-panel .help-mode-note { color: #c7b2d1; }
+:root[data-theme='emo'] .write-answer-form > label { color: #d6bfd7; }
+:root[data-theme='emo'] .write-answer-controls input { border-color: #5b4763; color: #f4edf8; background: #302a39; }
+:root[data-theme='emo'] .write-answer-controls input::placeholder { color: #aa96b5; }
+:root[data-theme='emo'] .sentence-builder-answer { border-color: #64506d; background: #292432; }
+:root[data-theme='emo'] .builder-placeholder { color: #aa96b5; }
+:root[data-theme='emo'] .builder-tile { border-color: #59455e; color: #f4e9f4; background: linear-gradient(135deg, #403347, #342b3c); box-shadow: 0 2px 7px #09080f55; }
+:root[data-theme='emo'] .builder-tile:not(:disabled):hover { border-color: #d67aa8; }
+:root[data-theme='emo'] .selected-tile { background: #52334c; }
+:root[data-theme='emo'] .topic-picker-trigger,
+:root[data-theme='emo'] .theme-picker-trigger { border-color: #59455e; color: #f0c1da; background: linear-gradient(135deg, #392d41, #30273a); box-shadow: 0 4px 14px #0e0a1455, inset 0 1px #ffffff10; }
+:root[data-theme='emo'] .topic-picker-trigger:hover,
+:root[data-theme='emo'] .topic-picker-trigger[aria-expanded='true'],
+:root[data-theme='emo'] .theme-picker-trigger:hover,
+:root[data-theme='emo'] .theme-picker-trigger[aria-expanded='true'] { border-color: #b95796; }
+:root[data-theme='emo'] .topic-picker-flower { color: #ffc1db; background: #4b3650; }
+:root[data-theme='emo'] .topic-menu,
+:root[data-theme='emo'] .theme-menu { border-color: #59455e; color: #f4edf8; background: linear-gradient(145deg, #352d3d, #282330); box-shadow: 0 14px 35px #08060dbb; }
+:root[data-theme='emo'] .topic-menu-heading { color: #c5a9cb; }
+:root[data-theme='emo'] .topic-option,
+:root[data-theme='emo'] .theme-option { color: #efe3f2; }
+:root[data-theme='emo'] .topic-option:hover,
+:root[data-theme='emo'] .theme-option:hover { border-color: #634b67; background: #403044; }
+:root[data-theme='emo'] .topic-option.selected,
+:root[data-theme='emo'] .theme-option.selected { border-color: #76516c; background: #493147; }
+:root[data-theme='emo'] .topic-option-copy strong,
+:root[data-theme='emo'] .topic-option-check { color: #f0a9ca; }
+:root[data-theme='emo'] .topic-option-copy small { color: #b7a8c3; }
+:root[data-theme='emo'] .topic-option-flower,
+:root[data-theme='emo'] .theme-preview { color: #ffc1db; background: #49364d; }
+:root[data-theme='emo'] .topic-browser { border-color: #59455e; color: #efe3f2; background: linear-gradient(145deg, #352d3d, #282330); box-shadow: 0 24px 70px #08060dbb; }
+:root[data-theme='emo'] .topic-browser-head p { color: #c5a9cb; }
+:root[data-theme='emo'] .topic-browser-head h2 { color: #f4c2dc; }
+:root[data-theme='emo'] .topic-browser-close { border-color: #59455e; color: #ffc1db; background: #403044; }
+:root[data-theme='emo'] .topic-search-field { border-color: #59455e; color: #efa9cb; background: #302a39; }
+:root[data-theme='emo'] .topic-search-field:focus-within { border-color: #c65d99; box-shadow: 0 0 0 3px #53334d; }
+:root[data-theme='emo'] .topic-search-field input { color: #f4edf8; }
+:root[data-theme='emo'] .topic-search-field input::placeholder,
+:root[data-theme='emo'] .topic-search-empty { color: #aa96b5; }
+:root[data-theme='emo'] .welcome-card { border-color: #57465e; color: #f1e7f3; background: linear-gradient(145deg, #352d3d, #282330); box-shadow: 0 24px 70px #08060dbb, inset 0 1px #ffffff10; }
+:root[data-theme='emo'] .welcome-copy,
+:root[data-theme='emo'] .welcome-topic-label,
+:root[data-theme='emo'] .welcome-topic-description { color: #c7b7cf; }
+:root[data-theme='emo'] .welcome-eyebrow { color: #f0a9ca; }
+:root[data-theme='emo'] .welcome-symbol { color: #f0a9ca; }
+:root[data-theme='emo'] .game-mode-browser .topic-option.selected { border-color: #76516c; background: #493147; }
+
+@media (max-width: 650px) {
+  :root[data-theme='christian'] .faith-cross {
+    top: -25px;
+    right: -10px;
+    left: auto;
+    width: 42px;
+    height: 42px;
+    font-size: 25px;
+  }
+}

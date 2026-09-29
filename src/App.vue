@@ -282,7 +282,7 @@ function chooseBrowserTopic(topicId) {
 }
 
 function handleOutsideTopicClick(event) {
-  if (!event.target.closest?.('.game-mode-picker')) modePickerOpen.value = false
+  if (!event.target.closest?.('.game-mode-picker') && !event.target.closest?.('.game-mode-browser')) modePickerOpen.value = false
   if (!event.target.closest?.('.theme-picker')) themeMenuOpen.value = false
 }
 
@@ -450,6 +450,39 @@ function answerState(index) {
       </div>
     </Transition>
 
+    <Transition name="topic-browser-fade">
+      <div v-if="modePickerOpen" class="topic-browser-backdrop" @click.self="modePickerOpen = false" @keydown.esc.stop.prevent="modePickerOpen = false">
+        <section class="topic-browser game-mode-browser" role="dialog" aria-modal="true" aria-labelledby="game-mode-dialog-title">
+          <header class="topic-browser-head">
+            <div>
+              <p>WAYS TO PRACTICE</p>
+              <h2 id="game-mode-dialog-title">Choose a game mode</h2>
+            </div>
+            <button class="topic-browser-close" type="button" aria-label="Close game mode menu" @click="modePickerOpen = false">×</button>
+          </header>
+          <div class="topic-browser-results game-mode-options" role="listbox" aria-label="Game modes">
+            <button
+              v-for="mode in gameModes"
+              :key="mode.id"
+              class="topic-option"
+              :class="{ selected: mode.id === gameMode }"
+              type="button"
+              role="option"
+              :aria-selected="mode.id === gameMode"
+              @click="chooseGameMode(mode.id)"
+            >
+              <span class="topic-option-flower" aria-hidden="true">{{ mode.symbol }}</span>
+              <span class="topic-option-copy">
+                <strong>{{ mode.label }}</strong>
+                <small>{{ mode.description }}</small>
+              </span>
+              <span v-if="mode.id === gameMode" class="topic-option-check" aria-hidden="true">✓</span>
+            </button>
+          </div>
+        </section>
+      </div>
+    </Transition>
+
     <Transition name="topic-fade" mode="out-in" appear>
     <section v-if="hasStarted && quizContentVisible" :key="selectedTopicId" class="quiz-layout" aria-live="polite">
       <div class="intro-column">
@@ -508,44 +541,22 @@ function answerState(index) {
         <template v-if="!finished">
           <div class="card-head">
             <span class="question-count">QUESTION <b>{{ String(currentIndex + 1).padStart(2, '0') }}</b><i>OF</i>{{ String(questions.length).padStart(2, '0') }}</span>
-            <div class="game-mode-picker" @keydown.esc.stop.prevent="modePickerOpen = false">
+            <div class="game-mode-picker">
               <button
                 class="topic-picker-trigger game-mode-trigger"
                 type="button"
                 aria-label="Choose a game mode"
-                aria-haspopup="listbox"
-                aria-controls="game-mode-listbox"
+                aria-haspopup="dialog"
+                aria-controls="game-mode-dialog-title"
                 :aria-expanded="modePickerOpen"
                 @click="modePickerOpen = !modePickerOpen"
               >
                 <span class="topic-picker-flower" aria-hidden="true">{{ activeGameMode.symbol }}</span>
                 <span class="topic-picker-value">{{ activeGameMode.label }}</span>
-                <span class="topic-picker-chevron" :class="{ open: modePickerOpen }" aria-hidden="true">⌄</span>
+                <span class="topic-picker-chevron" :class="{ open: modePickerOpen }" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6" /></svg>
+                </span>
               </button>
-              <Transition name="topic-menu">
-                <div v-if="modePickerOpen" class="topic-menu mode-menu">
-                  <p class="topic-menu-heading">CHOOSE A GAME MODE</p>
-                  <div id="game-mode-listbox" role="listbox" aria-label="Game modes">
-                    <button
-                      v-for="mode in gameModes"
-                      :key="mode.id"
-                      class="topic-option"
-                      :class="{ selected: mode.id === gameMode }"
-                      type="button"
-                      role="option"
-                      :aria-selected="mode.id === gameMode"
-                      @click="chooseGameMode(mode.id)"
-                    >
-                      <span class="topic-option-flower" aria-hidden="true">{{ mode.symbol }}</span>
-                      <span class="topic-option-copy">
-                        <strong>{{ mode.label }}</strong>
-                        <small>{{ mode.description }}</small>
-                      </span>
-                      <span v-if="mode.id === gameMode" class="topic-option-check" aria-hidden="true">✓</span>
-                    </button>
-                  </div>
-                </div>
-              </Transition>
             </div>
           </div>
           <div class="progress-track" role="progressbar" :aria-valuenow="currentIndex + 1" :aria-valuemin="1" :aria-valuemax="questions.length" :aria-label="`Question ${currentIndex + 1} of ${questions.length}`">
